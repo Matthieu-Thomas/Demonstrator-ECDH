@@ -185,5 +185,5 @@ build.xml         # Configuration Ant
 
 # Auteurs
 - Audrey **Le Basnier**
-- Matthieu **Thomas** https://github.com/Matthieu-Thomas
-- Basile **Tellier**
+- Matthieu **Thomas** 
+- Basile **Tellier** https://github.com/Garagorn
