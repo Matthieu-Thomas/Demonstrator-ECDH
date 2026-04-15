@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="elliptic" default="run" basedir=".">
+
+    <!-- ===== Propriétés ===== -->
+    <property name="app.name" value="elliptic"/>
+    <property name="app.version" value="1.0"/>
+    <property name="app.fullname" value="${app.name}-${app.version}"/>
+
+    <property name="src.home" value="src"/>
+    <property name="build.home" value="build"/>
+    <property name="dist.home" value="dist"/>
+
+    <!-- ===== Clean ===== -->
+    <target name="clean">
+        <delete dir="${build.home}"/>
+        <delete dir="${dist.home}"/>
+    </target>
+
+    <!-- ===== Préparation ===== -->
+    <target name="prepare">
+        <mkdir dir="${build.home}"/>
+        <mkdir dir="${dist.home}"/>
+    </target>
+
+    <!-- ===== Compilation ===== -->
+    <target name="compile" depends="prepare">
+        <javac srcdir="${src.home}"
+               destdir="${build.home}"
+               includeantruntime="false"
+               encoding="UTF-8"/>
+        
+        <copy todir="${build.home}">
+            <fileset dir="${src.home}" excludes="**/*.java"/>
+        </copy>
+    </target>
+
+    <!-- ===== Création JAR ===== -->
+    <target name="dist" depends="clean,compile">
+        <jar jarfile="${dist.home}/${app.fullname}.jar" basedir="${build.home}">
+            <manifest>
+                <attribute name="Main-Class" value="Main"/>
+            </manifest>
+        </jar>
+    </target>
+
+    <!-- ===== Exécution ===== -->
+    <target name="run" depends="dist">
+        <java jar="${dist.home}/${app.fullname}.jar" fork="true"/>
+    </target>
+
+</project>
